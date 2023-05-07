@@ -2,11 +2,11 @@
 #  become: yes
 
   vars:
-  - docker_image_name: "tkparial1/abctech_img"
-  - docker_container_name: "tkparial1/abctech_container"
+  - docker_image_name: "naveenbasinepalli/abcdtech"
+  - docker_container_name: "naveenbasinepalli/abcdtech_container"
   - image_tag: latest
-  - dockerhub_username: tkparial1
-  - dockerhub_password: dckr_pat_pFqZ8imH8VTll-G2UEm6VQrSXv4
+  - dockerhub_username: naveenbasinepalli
+  - dockerhub_password: dckr_pat_8_TSaWAnX3aY1oNCk4n-vbH8ju4
   - patting_http_port: "8081"
   tasks:  
   - name: Login to Docker Hub
