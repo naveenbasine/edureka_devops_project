@@ -5,7 +5,7 @@
     deployment_name: abctech1-deployment
     service_name: abctech1-service
     app_label: abctech1
-    container_image: naveenbasinepalli/abcdtech:v1
+    container_image: tkparial1/abctech_img:v1
     container_port: 8086
     service_port: 80
     namespace: abctech1
@@ -91,4 +91,4 @@
     - name: Display kubectl output
       debug:
         var: kubectl_output.stdout
-...
+... 
