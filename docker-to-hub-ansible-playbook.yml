@@ -1,0 +1,43 @@
+- hosts: kslave
+#  become: yes
+
+  vars:
+  - docker_image_name: "tkparial1/abctech_img"
+  - docker_container_name: "tkparial1/abctech_container"
+  - image_tag: latest
+  - dockerhub_username: tkparial1
+  - dockerhub_password: dckr_pat_pFqZ8imH8VTll-G2UEm6VQrSXv4
+  - patting_http_port: "8081"
+  tasks:  
+  - name: Login to Docker Hub
+    docker_login:
+     username: "{{ dockerhub_username }}"
+     password: "{{ dockerhub_password }}"
+  
+  - name: "Create folder in tmp"
+    file:     
+     path: "/tmp/docker-ansible/"
+     state: "directory"
+    ignore_errors: yes
+     
+  - name: "Copy Docker file"
+    copy:
+     src: "{{playbook_dir}}/Dockerfile"
+     dest: "/tmp/docker-ansible/"
+ #    remote_src: yes
+     
+  - name: "Copy artifacts (war) file"
+    copy:
+     src: "{{playbook_dir}}/target/ABCtechnologies-1.0.war"
+     dest: "/tmp/docker-ansible/"
+#     remote_src: yes 
+
+  - name: "Build docker image from Dockerfile and Push Docker image to Docker Hub"
+    docker_image:
+       name:  "{{docker_image_name}}"
+       build:
+#        pull: yes
+         path: "/tmp/docker-ansible/"        
+       tag: v1
+       push: true
+       source: build
